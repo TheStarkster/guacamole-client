@@ -28,6 +28,8 @@ var Guacamole = Guacamole || {};
  * @param {!Guacamole.InputStream} stream
  *     The stream that data will be read from.
  */
+
+console.log("helooooooo")
 Guacamole.ArrayBufferReader = function(stream) {
 
     /**

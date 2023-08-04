@@ -414,6 +414,7 @@ Guacamole.Keyboard = function Keyboard(element) {
         40:  [0xFF54, 0xFF54, 0xFF54, 0xFFB2], // down arrow  / KP 2
         45:  [0xFF63, 0xFF63, 0xFF63, 0xFFB0], // insert      / KP 0
         46:  [0xFFFF, 0xFFFF, 0xFFFF, 0xFFAE], // delete      / KP decimal
+        76:  [0xFF76], //Key L,
         91:  [0xFFE7], // left windows/command key (meta_l)
         92:  [0xFFE8], // right window/command key (meta_r)
         93:  [0xFF67], // menu key

@@ -139,6 +139,7 @@ Guacamole.KeyEventInterpreter = function KeyEventInterpreter(batchSeperation, st
         {keysym: 0xFF9B, name: 'Page Down' },
         {keysym: 0xFF9C, name: 'End' },
         {keysym: 0xFF9E, name: 'Insert' },
+        {keysym: 0xFF76, name: 'L' },
         {keysym: 0xFFAA, name: '*', value: "*" },
         {keysym: 0xFFAB, name: '+', value: "+" },
         {keysym: 0xFFAD, name: '-', value: "-" },
