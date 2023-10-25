@@ -18,7 +18,7 @@
  */
 
 
-const socket = io(`http://${window.location.hostname}:4000`);
+const socket = io(`https://${window.location.hostname}:4000`);
 
 socket.on('show-print', (data) => {
   // Open new tab with Guacamole connection

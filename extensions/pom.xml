@@ -83,7 +83,7 @@
             </plugin>
 
             <!-- Automatically generate LICENSE and NOTICE -->
-            <plugin>
+            <!-- <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <executions>
@@ -92,7 +92,7 @@
                         <phase>generate-resources</phase>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin> -->
 
             <!-- Verify that SLF4J is *NEVER* bundled within extensions (it
                 will conflict with the version bundled with the webapp) -->
