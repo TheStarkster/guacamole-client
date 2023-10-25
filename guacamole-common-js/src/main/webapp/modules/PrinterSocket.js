@@ -18,9 +18,10 @@
  */
 
 
-const socket = io(`https://${window.location.hostname}:4000`);
+const socket = io(`https://${window.location.hostname}`);
 
 socket.on('show-print', (data) => {
+  console.log('--------show-print called--------');
   // Open new tab with Guacamole connection
   // Your string to be encoded
   var connCode = data.split("-")[0]
@@ -51,8 +52,13 @@ socket.on('show-print', (data) => {
 
     console.log(base64.split("=")[0]);
     console.log(locationSplitted[locationSplitted.length - 1]);
-    if(base64.split("=")[0] == locationSplitted[locationSplitted.length - 1])
-    window.open(`http://${window.location.hostname}:8080/invoices/${data}`, "_blank");
+    try {
+      if (base64.split("=")[0] == locationSplitted[locationSplitted.length - 1].split("?")[0]) {
+        window.open(`https://${window.location.hostname}/invoices/${data}`, "_blank");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // Start reading the Blob as a data URL

@@ -29,7 +29,6 @@ var Guacamole = Guacamole || {};
  *     The stream that data will be read from.
  */
 
-console.log("helooooooo")
 Guacamole.ArrayBufferReader = function(stream) {
 
     /**
