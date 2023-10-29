@@ -24,6 +24,18 @@ body.client {
     overflow: hidden;
 }
 
+.fixed-logout-button {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+    padding: 10px 15px;
+    background-color: #f44336;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
+
 #preload {
     visibility: hidden;
     position: absolute;

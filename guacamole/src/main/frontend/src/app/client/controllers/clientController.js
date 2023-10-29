@@ -73,12 +73,21 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
      * In order to open the guacamole menu, we need to hit ctrl-alt-shift. There are
      * several possible keysysms for each key.
      */
-    var SHIFT_KEYS  = {0xFFE1 : true, 0xFFE2 : true},
-        ALT_KEYS    = {0xFFE9 : true, 0xFFEA : true, 0xFE03 : true, 0xFFE7 : true, 0xFFE8 : true},
-        CTRL_KEYS   = {0xFFE3 : true, 0xFFE4 : true},
-        L_KEY       = {0x6C : true},
 
-	MENU_KEYS   = angular.extend({}, CTRL_KEYS, L_KEY);
+    var SHIFT_KEYS  = {0xFFE1 : true, 0xFFE2 : true},
+        ALT_KEYS    = {0xFFE9 : true, 0xFFEA : true, 0xFE03 : true,
+                       0xFFE7 : true, 0xFFE8 : true},
+        CTRL_KEYS   = {0xFFE3 : true, 0xFFE4 : true},
+        MENU_KEYS   = angular.extend({}, SHIFT_KEYS, ALT_KEYS, CTRL_KEYS);
+
+    //below are gurkaran's modifications....
+    // var SHIFT_KEYS  = {0xFFE1 : true, 0xFFE2 : true},
+    //     ALT_KEYS    = {0xFFE9 : true, 0xFFEA : true, 0xFE03 : true, 0xFFE7 : true, 0xFFE8 : true},
+    //     CTRL_KEYS   = {0xFFE3 : true, 0xFFE4 : true},
+    //     L_KEY       = {0x6C : true},
+
+	// MENU_KEYS   = angular.extend({}, CTRL_KEYS, L_KEY);
+    // till here...
 
     /**
      * Keysym for detecting any END key presses, for the purpose of passing through
@@ -398,18 +407,39 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
      * @returns {boolean}
      *     true if Ctrl+Alt+Shift has been pressed, false otherwise.
      */  
+
+    // gurkaran's modified version of isMenuShortcutPressed start here...
+    // const isMenuShortcutPressed = function isMenuShortcutPressed(keyboard) {
+    //     // Ctrl+Alt+Shift has NOT been pressed if any key is currently held
+    //     // down that isn't Ctrl, Alt, or Shift
+    //     if (_.findKey(keyboard.pressed, (val, keysym) => !MENU_KEYS[keysym])) {
+    //         return false;
+    //     }
+            
+            
+    //     // Verify that one of each required key is held, regardless of
+    //     // left/right location on the keyboard
+    //     return !!(_.findKey(CTRL_KEYS,  (val, keysym) => keyboard.pressed[keysym]) && _.findKey(L_KEY,   (val, keysym) => keyboard.pressed[keysym])
+	// );
+
+    // };
+
+    // ends here...
+
     const isMenuShortcutPressed = function isMenuShortcutPressed(keyboard) {
+
         // Ctrl+Alt+Shift has NOT been pressed if any key is currently held
         // down that isn't Ctrl, Alt, or Shift
-        if (_.findKey(keyboard.pressed, (val, keysym) => !MENU_KEYS[keysym])) {
+        if (_.findKey(keyboard.pressed, (val, keysym) => !MENU_KEYS[keysym]))
             return false;
-        }
-            
-            
+
         // Verify that one of each required key is held, regardless of
         // left/right location on the keyboard
-        return !!(_.findKey(CTRL_KEYS,  (val, keysym) => keyboard.pressed[keysym]) && _.findKey(L_KEY,   (val, keysym) => keyboard.pressed[keysym])
-	);
+        return !!(
+                _.findKey(SHIFT_KEYS, (val, keysym) => keyboard.pressed[keysym])
+             && _.findKey(ALT_KEYS,   (val, keysym) => keyboard.pressed[keysym])
+             && _.findKey(CTRL_KEYS,  (val, keysym) => keyboard.pressed[keysym])
+        );
 
     };
 
@@ -519,6 +549,14 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
         if ($scope.focusedClient)
             ManagedClient.createShareLink($scope.focusedClient, sharingProfile);
     };
+
+    $scope.logout = function() {
+        authenticationService.logout()
+        .then(function logoutSuccessful() {
+            window.close()
+        });
+    };
+    
 
     /**
      * Returns whether the current connection has any associated share links.

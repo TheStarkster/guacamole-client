@@ -40,6 +40,9 @@
         <guac-file-transfer-manager client-group="clientGroup"></guac-file-transfer-manager>
     </div>
 
+    <!-- Floating log out button -->
+    <button class="fixed-logout-button" ng-click="logout()">Logout</button>
+
     <!-- Connection stability warning -->
     <div id="connection-warning" ng-show="isConnectionUnstable()">
         {{'CLIENT.TEXT_CLIENT_STATUS_UNSTABLE' | translate}}
